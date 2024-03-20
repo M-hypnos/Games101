@@ -51,12 +51,12 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     float n = -zNear;
     float f = -zFar;
 
-    float t = zNear * tan(eye_fov / 2);
+    float t = zNear * tan(eye_fov / 2 * M_PI / 180);
     float r = t * aspect_ratio;
     Eigen::Matrix4f translate;
     translate <<
         1 / r, 0, 0, 0,
-        0, 1 / r, 0, 0,
+        0, 1 / t, 0, 0,
         0, 0, 2 / (n - f), 0,
         0, 0, 0, 1;
     Eigen::Matrix4f translate1;
@@ -94,7 +94,7 @@ Eigen::Matrix4f get_rotation(Vector3f axis, float angle) {
     Eigen::Matrix4f i;
     i = (1 - cos(a)) * axisEx * axisEx.transpose();
     translate = cos(a) * I + (1 - cos(a)) * axisEx * axisEx.transpose() + sin(a) * translate;*/
-    //ÉÏÃæÐ´·¨ cos(a) * I Ö®ºó »áµ¼ÖÂ w²»Î»1£¬ÒòÎªµ¥Î»¾ØÕóµÚ4ÐÐµÚ4ÁÐµÄ1£¬³ËÁËcos(a) ºó²»ÔÙÎª1
+    //ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ cos(a) * I Ö®ï¿½ï¿½ ï¿½áµ¼ï¿½ï¿½ wï¿½ï¿½Î»1ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½4ï¿½Ðµï¿½4ï¿½Ðµï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cos(a) ï¿½ï¿½ï¿½ï¿½Îª1
 
     Eigen::Matrix3f I3 = Eigen::Matrix3f::Identity();
     Eigen::Matrix3f translate3;
