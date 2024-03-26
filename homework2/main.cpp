@@ -63,10 +63,10 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     //右手坐标系下，z值越大，离near越近.为了转化成深度测试时,z值越小,离near越大,透视矩阵需要对z轴取反
     Eigen::Matrix4f translate3;
     translate3 <<
-        -1, 0, 0, 0,
-        0, -1, 0, 0,
-        0, 0, 1,0,
-        0, 0, 0, -1;
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, -1,0,
+        0, 0, 0, 1;
 
     projection = translate3 * translate * translate1 * translate2 * projection;
 
